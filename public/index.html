@@ -131,15 +131,9 @@
 
 		// Send numbers to dashboard on click
 		document.addEventListener('click', function (event) {
-			if (!event.target.matches('.number') || event.target.matches('.selected')) return;
-
-			// Set selected class
-			event.target.classList.add('selected');
+			if (!event.target.matches('.number')) return;
 
 			const number = event.target.dataset.number;
-			console.log(number);
-
-			// Data to send			
 			const data = {
 				userid: userid,
 				name: name,
@@ -151,10 +145,17 @@
 					'content-type': 'application/json',
 				},
 				body: JSON.stringify(data)
-			}
-			const response = fetch('/dashboard', options);
-			//const json = await response.json();
+			};
 
+			
+			if (event.target.matches('.selected')) {				
+				event.target.classList.remove('selected');
+				const response = fetch('/remove', options);
+			} else {
+				event.target.classList.add('selected');
+				const response = fetch('/dashboard', options);
+			}
+			
 		}, false);
 
 

@@ -45,3 +45,23 @@ app.post('/dashboard', (request, response) => {
 		data: data 
 	});
 });
+
+// Remove # from attendees board
+app.post('/remove', (request, response) => {
+	const data = request.body;	
+
+	database.find({ userid: data.userid }, (err, query) => {
+		if (err) {response.end(); return;}
+
+		// If userid doesn't exists, create new record
+		if (query.length != 0) {		
+			console.log('remove number: ' + data.number);
+			database.update({ userid: data.userid }, { $pull: { number: data.number } }, {}, function () {});
+		}	
+	});
+
+	response.json({
+		status: 'number removed',
+		data: data 
+	});
+});

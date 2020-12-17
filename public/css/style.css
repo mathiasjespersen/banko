@@ -83,7 +83,7 @@ button:focus {
 	text-align: center;
 	box-sizing: border-box;
 	padding: .3em 0 .2em;
-	font-size: 10vw;
+	font-size: 9vw;
 	cursor: pointer;
 }
 .number.selected {
@@ -117,6 +117,7 @@ ul li {
 	}
 	.number {
 		padding: .5em 0 .4em;	
+		font-size: 10vw;
 	}
 	#btnNewBoard {
 		left: 30px;
