@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>Banko</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/style.css?v=0.1" type="text/css" media="screen" />
 </head>
 <body>
@@ -10,7 +12,7 @@
 
 	<div id="attend">
 		<input type="text" name="name" id="name" value="" placeholder="State your name">
-		<button id="btnAttend">Attend game</button>
+		<button id="btnAttend">Attend</button>
 	</div>
 
 
@@ -74,7 +76,6 @@
 
 			// Generate numbers
 			// Setup as regular "banko plade"
-			//const numbers = document.getElementById('numbers');
 			const numbers = document.createElement('div');
 			numbers.id = 'numbers';
 			document.body.append(numbers);
@@ -91,9 +92,38 @@
 				item.textContent = number+1;
 				numbers.append(item);
 			}
+
+			// Add button for creating new board
+			const btnNewBoard = document.createElement('button');
+			btnNewBoard.id = 'btnNewBoard';
+			btnNewBoard.textContent = 'New board';
+			document.body.append(btnNewBoard);
+
 		}
 
 
+		function newBoard() {
+			console.log('new board');
+
+			const board = document.getElementById('numbers');
+			board.innerHTML = '';
+			
+			let arr = [...Array(90).keys()],
+				shuffledArr = shuffle(arr),
+				slicedArr = shuffledArr.slice(0, 15);
+				//finalArr = slicedArr.sort((a, b) => a - b);
+
+			for (number of slicedArr) {
+				const item = document.createElement('div');
+				item.classList.add('number');
+				item.setAttribute('data-number', number+1);
+				item.textContent = number+1;
+				board.append(item);
+			}
+		}
+
+
+		// Send numbers to dashboard on click
 		document.addEventListener('click', function (event) {
 			if (!event.target.matches('.number') || event.target.matches('.selected')) return;
 
@@ -121,6 +151,13 @@
 
 		}, false);
 
+
+		document.addEventListener('click', function (event) {
+			if (!event.target.matches('#btnNewBoard')) return;
+
+			newBoard();
+
+		}, false);
 
 		// Shuffle an array
 		function shuffle(array) {
