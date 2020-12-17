@@ -29,7 +29,8 @@
 
 				if (attendee.number) {
 					const numbers = document.createElement('span');
-					numbers.textContent = `: ${attendee.number.sort((a, b) => a - b)}`;
+					let filteredNumbers = attendee.number.filter(function(e) { return e != null; });
+					numbers.textContent = `: ${filteredNumbers.sort((a, b) => a - b)}`;
 					item.append(numbers);
 				}				
 				
