@@ -51,11 +51,19 @@
 				return false;
 			}
 
+			// Check if name ends with an s
+			let suffix = '';
+			if (name.substring(name.length-1) == 's') {
+				suffix = "'";
+			} else {
+				suffix = "'s";
+			}
+
 			// Hide input, and display name
-			attend.style.display = 'none';			
+			attend.style.display = 'none';	
 			const nameWrapper = document.getElementById('nameWrapper');
-			nameWrapper.textContent = name + "'s";
-			//document.body.append(nameWrapper);
+			nameWrapper.textContent = name + suffix;
+
 
 			// Data to send			
 			const data = {
@@ -103,8 +111,6 @@
 
 
 		function newBoard() {
-			console.log('new board');
-
 			const board = document.getElementById('numbers');
 			board.innerHTML = '';
 			
@@ -158,6 +164,8 @@
 			newBoard();
 
 		}, false);
+
+
 
 		// Shuffle an array
 		function shuffle(array) {

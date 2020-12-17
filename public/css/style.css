@@ -25,12 +25,17 @@ h1 {
 	font-size: 5vw;
 }
 
+input, 
+button {
+	font: inherit;
+	margin: .2em 0;
+}
 input {
 	background-color: rgba(170,34,0,.1);
 	color: rgba(170,34,0,1);
 	padding: 1em 1.3em;
 	border-radius: 4em;
-	border: none;	
+	border: none;
 }
 input:hover,
 input:focus {
