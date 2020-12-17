@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Banko</title>
+	<link rel="stylesheet" href="css/style.css?v=0.1" type="text/css" media="screen" />
+</head>
+<body>
+
+	<h1><span id="nameWrapper">Your Playtype</span> Banko Board</h1>
+
+	<div id="attend">
+		<input type="text" name="name" id="name" value="" placeholder="State your name">
+		<button id="btnAttend">Attend game</button>
+	</div>
+
+
+	<script type="text/javascript">
+
+		// Generate session id to pair with user name
+		let userid = '';	
+		if (sessionStorage.getItem('id') === null) {
+			userid = new Date().getTime(); 
+			sessionStorage.setItem('id', userid);
+		} else {
+			userid = sessionStorage.getItem('id'); 
+		}		
+		console.log(userid);
+
+
+		// Define user: input with name/id
+		// Store user in database 
+
+		// Table of numbers 
+		// Store selected numbers to variable
+		// Update user/record with selected numbers
+
+		const attend = document.getElementById('attend');
+		const btnAttend = document.getElementById('btnAttend');
+		let name = document.getElementById('name').value,
+			numbersArr = [];
+		
+		btnAttend.addEventListener('click', createUser);
+		async function createUser() {
+
+			name = document.getElementById('name').value;
+			
+			// Check if name has been entered 
+			if (name === '') {
+				return false;
+			}
+
+			// Hide input, and display name
+			attend.style.display = 'none';			
+			const nameWrapper = document.getElementById('nameWrapper');
+			nameWrapper.textContent = name + "'s";
+			//document.body.append(nameWrapper);
+
+			// Data to send			
+			const data = {
+				userid: userid,
+				name: name,
+				numbers : numbersArr
+			};
+			const options = {
+				method: 'POST',
+				headers : {
+					'content-type': 'application/json',
+				},
+				body: JSON.stringify(data)
+			}
+			const response = await fetch('/dashboard', options);
+			const json = await response.json();			
+
+
+			// Generate numbers
+			// Setup as regular "banko plade"
+			//const numbers = document.getElementById('numbers');
+			const numbers = document.createElement('div');
+			numbers.id = 'numbers';
+			document.body.append(numbers);
+
+			let arr = [...Array(90).keys()],
+				shuffledArr = shuffle(arr),
+				slicedArr = shuffledArr.slice(0, 15);
+				//finalArr = slicedArr.sort((a, b) => a - b);
+
+			for (number of slicedArr) {
+				const item = document.createElement('div');
+				item.classList.add('number');
+				item.setAttribute('data-number', number+1);
+				item.textContent = number+1;
+				numbers.append(item);
+			}
+		}
+
+
+		document.addEventListener('click', function (event) {
+			if (!event.target.matches('.number') || event.target.matches('.selected')) return;
+
+			// Set selected class
+			event.target.classList.add('selected');
+
+			const number = event.target.dataset.number;
+			console.log(number);
+
+			// Data to send			
+			const data = {
+				userid: userid,
+				name: name,
+				number : number
+			};
+			const options = {
+				method: 'POST',
+				headers : {
+					'content-type': 'application/json',
+				},
+				body: JSON.stringify(data)
+			}
+			const response = fetch('/dashboard', options);
+			//const json = await response.json();
+
+		}, false);
+
+
+		// Shuffle an array
+		function shuffle(array) {
+			let currentIndex = array.length, temporaryValue, randomIndex;
+			while (0 !== currentIndex) {
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex -= 1;
+				temporaryValue = array[currentIndex];
+				array[currentIndex] = array[randomIndex];
+				array[randomIndex] = temporaryValue;
+			}
+			return array;
+		}
+
+	</script>
+</body>
+</html>

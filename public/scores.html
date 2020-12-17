@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Banko</title>
+	<link rel="stylesheet" href="css/style.css?v=0.1" type="text/css" media="screen" />
+</head>
+<body>
+
+	<h1>Attendees</h1>
+
+	<script type="text/javascript">	
+
+		// Load data every 1-2sec
+
+		getData();	
+		async function getData() {
+			
+			const response = await fetch('/dashboard');
+			const json = await response.json();
+
+			const wrapper = document.createElement('ul');
+
+			for (attendee of json) {
+				const item = document.createElement('li');
+				
+				const name = document.createElement('span');
+				name.textContent = attendee.name;
+				item.append(name);
+
+				if (attendee.number) {
+					const numbers = document.createElement('span');
+					numbers.textContent = `: ${attendee.number.sort((a, b) => a - b)}`;
+					item.append(numbers);
+				}				
+				
+				wrapper.append(item);
+			}
+		
+			document.body.append(wrapper);
+		}
+
+	</script>
+</body>
+</html>
