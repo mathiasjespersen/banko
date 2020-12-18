@@ -19,6 +19,17 @@
 
 	<script type="text/javascript">
 
+		function setViewportUnit() { 	
+			let vh = window.innerHeight,
+				padding = 80;
+
+			if (window.innerWidth < 800) {
+				padding = 60;
+			}
+			document.body.style.height = (vh - padding) + 'px';			
+		}
+		setViewportUnit();
+
 		// Generate session id to pair with user name
 		let userid = '';	
 		if (sessionStorage.getItem('id') === null) {
