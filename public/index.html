@@ -3,7 +3,7 @@
 <head>
 	<title>Banko</title>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" href="css/style.css?v=0.1" type="text/css" media="screen" />
 </head>
 <body>
@@ -15,6 +15,7 @@
 		<button id="btnAttend">Attend</button>
 	</div>
 
+	<div id="snow"></div>
 
 	<script type="text/javascript">
 
@@ -155,7 +156,7 @@
 				event.target.classList.add('selected');
 				const response = fetch('/dashboard', options);
 			}
-			
+
 		}, false);
 
 
@@ -182,5 +183,6 @@
 		}
 
 	</script>
+	<script src="js/snow.js"></script>	
 </body>
 </html>

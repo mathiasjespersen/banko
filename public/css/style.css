@@ -1,5 +1,11 @@
 :root {
   --grid-spacing: 1px;
+  --color-base: rgba(170,34,0,1);
+  --color-base-half: rgba(170,34,0,.5);
+  --color-base-tint: rgba(170,34,0,.1);
+  --color-accent: #fff;
+  --color-accent-half: rgba(255,255,255,.3);
+  --color-accent-tint: rgba(255,255,255,.1);
 }
 
 @font-face {
@@ -16,8 +22,8 @@ body {
 /*	display: flex;
 	align-content: flex-start;
 	flex-flow: row wrap;
-*/	background-color: #fff;
-	color: #a20;
+*/	background-color: var(--color-base);
+	color:var(--color-accent);
 }
 
 h1 {
@@ -31,8 +37,8 @@ button {
 	margin: .2em 0;
 }
 input {
-	background-color: rgba(170,34,0,.1);
-	color: rgba(170,34,0,1);
+	background-color: var(--color-accent-tint);
+	color: var(--color-accent);
 	padding: 1em 1.3em;
 	border-radius: 4em;
 	border: none;
@@ -40,15 +46,15 @@ input {
 input:hover,
 input:focus {
 	outline: none;
-	background-color: rgba(170,34,0,.4);
+	background-color: var(--color-accent-half);
 }
 input::placeholder {
-	color: rgba(170,34,0,.7);;
+	color: rgba(255,255,255,.7);
 }
 
 button {
-	background-color: rgba(170,34,0,1);
-	color: rgba(255,255,255,1);
+	background-color: var(--color-accent);
+	color: var(--color-base);
 	padding: 1em 1.3em;
 	border-radius: 4em;
 	border: none;
@@ -59,15 +65,15 @@ button {
 button:hover,
 button:focus {
 	outline: none;
-	background-color: rgba(170,34,0,.7);	
+	background-color: rgba(255,255,255,.7);
 }
 
 #numbers {
 	display: grid;
 	grid-template-columns: repeat(5, calc((100vw - 86px)/5));
 	grid-gap: var(--grid-spacing);
-	background-color: rgba(170,34,0,1);
-	border: var(--grid-spacing) solid rgba(170,34,0,1);
+	background-color: var(--color-accent);
+	border: var(--grid-spacing) solid var(--color-accent);;
 	width: min-content;
 	margin-top: 2em;
 }
@@ -79,7 +85,7 @@ button:focus {
 }
 .number {
 	position: relative;
-	background-color: #fff;
+	background-color: var(--color-base);
 	text-align: center;
 	box-sizing: border-box;
 	padding: .3em 0 .2em;
@@ -87,13 +93,17 @@ button:focus {
 	cursor: pointer;
 }
 .number.selected {
-	background-color: rgba(170,34,0,1);
-	color: rgba(255,255,255,.7);
+	background-color: var(--color-accent);
+	color: var(--color-base);
 }
 @media screen and (min-width: 800px) {
 	.number:hover {
-		background-color: rgba(170,34,0,.7);
-		color: rgba(255,255,255,.4);	
+		background-color: var(--color-base-half);
+		color: var(--color-base);
+	}
+	.number.selected:hover {
+		background-color: var(--color-accent);
+		color: var(--color-base);
 	}
 }
 
@@ -104,6 +114,17 @@ ul {
 
 ul li {
 	padding: .2em 0;	
+}
+
+#snow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    display: block;	
+    z-index: 100;
 }
 
 
