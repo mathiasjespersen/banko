@@ -20,13 +20,14 @@
 	<script type="text/javascript">
 
 		function setViewportUnit() { 	
+			const snow = document.getElementById('snow');
 			let vh = window.innerHeight,
 				padding = 80;
-
 			if (window.innerWidth < 800) {
 				padding = 60;
 			}
-			document.body.style.height = (vh - padding) + 'px';			
+			document.body.style.height = (vh - padding) + 'px';
+			snow.style.height = vh + 'px';
 		}
 		setViewportUnit();
 
